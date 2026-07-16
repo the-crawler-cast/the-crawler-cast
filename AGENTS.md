@@ -75,18 +75,19 @@ releases/           Release notes pointers (no binaries here)
 
 ---
 
-## Sync from showrunner (optional)
+## Sync from showrunner
 
-When working from the private monorepo, templates may live in `tools/public-repo/` and sync via:
+The public repo is a **git submodule** at `public/` inside the private monorepo.  
+Edit comms **directly in `public/`** — there is no duplicate copy under `tools/`.
 
 ```bash
-# From showrunner root
-./tools/publish_public.sh public/
+# From showrunner root — after editing public/
 cd public && git add -A && git commit -m "docs: …" && git push
 cd .. && git add public && git commit -m "chore: bump public submodule"
 ```
 
-Edit **English + `.fr.md` pairs** before sync. Do not rely on the script to generate translations.
+Clone with submodule: `git clone --recurse-submodules …`  
+Update submodule: `git submodule update --init public`
 
 Architecture details (CI, two-repo flow): see showrunner `docs/github-org.md` (private).
 
